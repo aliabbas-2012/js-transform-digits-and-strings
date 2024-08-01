@@ -1,6 +1,12 @@
 
 const isNumeric = (string) => /^[+-]?\d+(\.\d+)?$/.test(string)
 
+/**
+ * Transformer works for both functions based element and dataSet provided
+ * @param element
+ * @param dataSet
+ * @returns {*}
+ */
 function transform(element, dataSet) {
     const dataSetKeys = Object.keys(dataSet)
     for(const i in dataSetKeys) {
@@ -10,7 +16,13 @@ function transform(element, dataSet) {
     }
     return element;
 }
-function transformAlphabetToNumber(alphabet) {
+
+/**
+ * functions transform alphabet to digit
+ * @param alphabet
+ * @returns {*}
+ */
+function transformAlphabetToDigit(alphabet) {
     const dataSet = {
         one: 1,
         two: 2,
@@ -26,7 +38,12 @@ function transformAlphabetToNumber(alphabet) {
     return transform(alphabet, dataSet);
 }
 
-function transformNumberToAlphabet(number) {
+/**
+ * functions transform digit to alphabet
+ * @param number
+ * @returns {*}
+ */
+function transformDigitToAlphabet(number) {
     const dataSet = {
         0: 'zero',
         1: 'one',
@@ -50,10 +67,10 @@ function transformDigitsAndStrings(sample) {
         for (const k in elementArr) {
             const value = elementArr[k]
             if (isNumeric(value)) {
-                elementArr[k] = transformNumberToAlphabet(value);
+                elementArr[k] = transformDigitToAlphabet(value);
             }
             else {
-                elementArr[k] = transformAlphabetToNumber(value.toLowerCase());
+                elementArr[k] = transformAlphabetToDigit(value.toLowerCase());
             }
         }
 
