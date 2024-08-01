@@ -16,9 +16,16 @@ No installation is required. Simply include the script in your project.
 
 ### Functions
 
-#### `isNumeric`
+#### `transformDigitsAndStrings`
 
-Checks if a string is a numeric value.
+Convert the alphbet to number and vise versa
 
 ```javascript
-const isNumeric = (string) => /^[+-]?\d+(\.\d+)?$/.test(string);
+
+
+const sample  = ['1one', 'twotwo', 222, 'threeFarther&&', 'trees44', '555Five'];
+const output = transformDigitsAndStrings(sample);
+
+console.log(output);
+// Expected output: ['One1', '22', 'TwoTwoTwo', '3Farther&&', 'treesFourFour', 'FiveFiveFive5']
+
