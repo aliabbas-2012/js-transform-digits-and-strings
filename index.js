@@ -1,17 +1,28 @@
 
 const isNumeric = (string) => /^[+-]?\d+(\.\d+)?$/.test(string)
 
+Object.defineProperty(String.prototype, 'capitalize', {
+    value: function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    },
+    enumerable: false
+});
+
 /**
  * Transformer works for both functions based element and dataSet provided
  * @param element
  * @param dataSet
+ * @param needCapitalization
  * @returns {*}
  */
-function transform(element, dataSet) {
+function transform(element, dataSet, needCapitalization = false) {
     const dataSetKeys = Object.keys(dataSet)
     for(const i in dataSetKeys) {
         const elementKey = dataSetKeys[i];
-        const replacedValue = dataSet[elementKey];
+        let replacedValue = dataSet[elementKey];
+        if (needCapitalization) {
+            replacedValue = replacedValue.capitalize();
+        }
         element = element.replaceAll(elementKey, replacedValue)
     }
     return element;
@@ -35,7 +46,7 @@ function transformAlphabetToDigit(alphabet) {
         nine: 9,
     }
 
-    return transform(alphabet, dataSet);
+    return transform(alphabet, dataSet)
 }
 
 /**
@@ -56,7 +67,7 @@ function transformDigitToAlphabet(number) {
         8: 'eight',
         9: 'nine'
     }
-    return transform(number, dataSet);
+    return transform(number, dataSet, true);
 }
 
 function transformDigitsAndStrings(sample) {
